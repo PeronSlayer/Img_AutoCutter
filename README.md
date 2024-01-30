@@ -1,0 +1,1 @@
+"Img AutoCutter" is a PyQt5 tool for easy image cutting and extraction. It allows users to open images, perform customizable cuts,and explore files. The user-friendly interface includes zoom options and essential file actions. Cut parts are saved as separate PNG files,making it a simple tool for basic image manipulation. 
