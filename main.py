@@ -1,16 +1,17 @@
+from ctypes.wintypes import HPALETTE
 import os
 import sys
 import time
 #
 from PIL import Image
 from PyQt5.QtCore import Qt, pyqtSignal, QPoint, QCoreApplication, QRectF
-from PyQt5.QtGui import QPixmap, QIcon
+from PyQt5.QtGui import QPixmap, QIcon,  QPalette
 from PyQt5.QtWidgets import (
     QSplashScreen, QMainWindow, QProgressDialog,
     QApplication, QDesktopWidget, QWidget,
     QLabel, QVBoxLayout, QPushButton, QFormLayout, QLineEdit,
     QGraphicsView, QGraphicsScene, QGraphicsPixmapItem,
-    QTreeView, QFileSystemModel, QDialog
+    QTreeView, QFileSystemModel, QDialog,
 )
 from qdarkstyle import load_stylesheet_pyqt5
 from imgtopdf import ConvertPNGtoPDFApp
@@ -87,7 +88,9 @@ class ImgCutter(QMainWindow):
             ("Set the Skip for the next cut: (px)", self.skip_x_entry, str(self.skip_x))
         ]
 
-        footer_lbl = ("Copyright 2024 Alberto Lopez - This is software is not finished yet and is Under the MIT License. ")
+        github_link= "<a href=\"https://github.com/PeronSlayer/Img_AutoCutter\"><font color='black'>Github Repo</font></a>"
+       
+        footer_lbl = ("Copyright 2024 Alberto Lopez - This is software is not finished yet and is Under the MIT License. " +" "+ github_link)
 
         self.mainBar_widget = MainBar(self)
         self.mainBar_widget.setFixedHeight(30)
@@ -113,7 +116,9 @@ class ImgCutter(QMainWindow):
 
         layout.addWidget(self.controlButtons_widget)
         footerLbl = QLabel(footer_lbl)
-        footerLbl.setStyleSheet("background-color: red")
+        footerLbl.setStyleSheet("background-color: green")
+        
+        footerLbl.setOpenExternalLinks(True)
         layout.addWidget(footerLbl)
 
     # noinspection PyPep8Naming
