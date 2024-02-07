@@ -6,7 +6,7 @@ from PyQt5.QtCore import Qt
 import fitz  # PyMuPDF
 
 #NOT WORKING, TO-DO
-
+#
 class PDFViewer(QMainWindow):
     def __init__(self):
         super().__init__()

@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QAction, QApplication, QFileDialog
 from shared import ConversionControls
 # import fitz
-
+#
 #NOT WORKING, TO-DO
 
 # noinspection PyUnresolvedReferences,PyAttributeOutsideInit

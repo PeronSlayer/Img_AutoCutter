@@ -9,7 +9,7 @@ from PyQt5.QtGui import QPixmap, QIcon
 from PyQt5.QtCore import Qt, QRectF, pyqtSignal, QDir, QPoint, QCoreApplication, QSize
 from qtawesome import icon
 
-
+#
 # noinspection PyUnresolvedReferences,PyPep8,PyPep8Naming
 class ControlButtons(QWidget):
     zoomIn_btn: QToolButton | QToolButton
