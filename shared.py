@@ -18,6 +18,7 @@ class ControlButtons(QWidget):
     show_explorer_signal = pyqtSignal()
     cut_signal = pyqtSignal()
     show_pdf_converter_signal = pyqtSignal()
+    wip_message_signal = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -65,6 +66,7 @@ class ControlButtons(QWidget):
         self.pdfConv_btn.clicked.connect(self.show_pdf_converter)
         self.pdfConv_btn.setSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         self.pdfConv_btn.setFixedSize(74, 74)
+        self.pdfConv_btn.setEnabled(False)
 
         self.zoomIn_lbl = QLabel('Zoom In', self)
         self.zoomIn_lbl.setAlignment(Qt.AlignCenter)
@@ -83,6 +85,7 @@ class ControlButtons(QWidget):
 
         self.pdf_lbl = QLabel('PDF Converter', self)
         self.pdf_lbl.setAlignment(Qt.AlignCenter)
+        self.pdf_lbl.setStyleSheet("color: gray")
 
         zoomIn_layout = QVBoxLayout()
         zoomIn_layout.addWidget(self.zoomIn_lbl)
@@ -130,7 +133,8 @@ class ControlButtons(QWidget):
         self.show_explorer_signal.emit()
 
     def show_pdf_converter(self):
-        self.show_pdf_converter_signal.emit()
+        #self.show_pdf_converter_signal.emit()
+        self.wip_message_signal.emit()
 
     def apply_cut(self):
         self.cut_signal.emit()
@@ -164,28 +168,41 @@ class MainBar(QMainWindow):
         conf_menu = main_bar.addMenu('Configurations')
         help_menu = main_bar.addMenu('Help')
 
-        open_action = QAction('Open', self)
+        open_action = QAction('File Explorer(Open)', self)
         open_action.triggered.connect(self.show_fileExplorer)
         file_menu.addAction(open_action)
 
-        exit_action = QAction('Close', self)
+        exit_action = QAction('Exit', self)
         exit_action.triggered.connect(QApplication.instance().quit)
         file_menu.addAction(exit_action)
 
-        info_action = QAction('Info...', self)
+        info_action = QAction('About ImgCutter', self)
         info_action.triggered.connect(self.show_info_dialog)
         help_menu.addAction(info_action)
+
+        license_action = QAction('License terms', self)
+        license_action.triggered.connect(self.license_win)
+        help_menu.addAction(license_action)
 
         default_path = QAction('Paths', self)
         default_path.triggered.connect(self.show_confPath)
         conf_menu.addAction(default_path)
 
+        
+
+    def wip_message(self):
+        info_msg = QMessageBox()
+        info_msg.setIcon(QMessageBox.Information)
+        info_msg.setText("Actually I'm working on this function, wait until the next update.")
+        info_msg.setWindowTitle("Img AutoCutter - Work in Progress.")
+        info_msg.exec_()
+
     def show_fileExplorer(self):
         self.show_explorer_signal.emit()
 
     def show_confPath(self):
-        pass
-
+        self.wip_message()
+    
     def show_info_dialog(self):
         info_dialog = QDialog(self)
         info_dialog.setWindowTitle('Info')
@@ -200,14 +217,6 @@ class MainBar(QMainWindow):
                             The user-friendly interface includes zoom options and essential file actions.
                             Cut parts are saved as separate PNG files, 
                             making it a simple tool for basic image manipulation.
-
-                                ----- Copyright 2024 Alberto Lopez -----
-
-                            "Img AutoCutter" is free software: you can redistribute it and/or modify
-                            it under the terms of the GNU General Public License as published by
-                            the Free Software Foundation, either version 3 of the License.
-
-                            For info: support@alcybercloud.it
                             ''')
 
         info_label.setAlignment(Qt.AlignCenter)
@@ -219,3 +228,8 @@ class MainBar(QMainWindow):
 
         info_dialog.setLayout(info_dialog_layout)
         info_dialog.exec_()
+    
+    def license_win(self):
+        pass
+
+    

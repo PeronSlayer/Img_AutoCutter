@@ -13,7 +13,6 @@ from PyQt5.QtWidgets import (
     QTreeView, QFileSystemModel, QDialog
 )
 from qdarkstyle import load_stylesheet_pyqt5
-
 from imgtopdf import ConvertPNGtoPDFApp
 from shared import ControlButtons, MainBar
 
@@ -83,10 +82,12 @@ class ImgCutter(QMainWindow):
         self.graphics_scene.addItem(self.image_item)
 
         labels = [
-            ("Width:", self.weight_startEntry, str(self.weightStart)),
-            ("Height:", self.height_startEntry, str(self.heightStart)),
-            ("Skip:", self.skip_x_entry, str(self.skip_x))
+            ("Set the cut Width: (px)", self.weight_startEntry, str(self.weightStart)),
+            ("Set the cut Height: (px)", self.height_startEntry, str(self.heightStart)),
+            ("Set the Skip for the next cut: (px)", self.skip_x_entry, str(self.skip_x))
         ]
+
+        footer_lbl = ("Copyright 2024 Alberto Lopez - This is software is Under the MIT License. ")
 
         self.mainBar_widget = MainBar(self)
         self.mainBar_widget.setFixedHeight(30)

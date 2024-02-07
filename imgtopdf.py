@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QMainWindow, QWidget, QVBoxLayout, QAction, QApplica
 from shared import ConversionControls
 # import fitz
 
+#NOT WORKING, TO-DO
 
 # noinspection PyUnresolvedReferences,PyAttributeOutsideInit
 class ConvertPNGtoPDFApp(QMainWindow):
