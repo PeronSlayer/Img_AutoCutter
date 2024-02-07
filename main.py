@@ -87,7 +87,7 @@ class ImgCutter(QMainWindow):
             ("Set the Skip for the next cut: (px)", self.skip_x_entry, str(self.skip_x))
         ]
 
-        footer_lbl = ("Copyright 2024 Alberto Lopez - This is software is Under the MIT License. ")
+        footer_lbl = ("Copyright 2024 Alberto Lopez - This is software is not finished yet and is Under the MIT License. ")
 
         self.mainBar_widget = MainBar(self)
         self.mainBar_widget.setFixedHeight(30)
@@ -112,6 +112,9 @@ class ImgCutter(QMainWindow):
         self.controlButtons_widget.show_pdf_converter_signal.connect(self.show_pdf_converter)
 
         layout.addWidget(self.controlButtons_widget)
+        footerLbl = QLabel(footer_lbl)
+        footerLbl.setStyleSheet("background-color: red")
+        layout.addWidget(footerLbl)
 
     # noinspection PyPep8Naming
     def show_fileExplorer(self):
