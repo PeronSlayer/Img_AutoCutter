@@ -21,20 +21,18 @@ from shared import ControlButtons, MainBar
 class FileExplorerWindow(QDialog):
     file_selected_signal = pyqtSignal(str)
 
-    def __init__(self, parent=None):
+    def __init__(self, default_path, parent=None):
         super().__init__(parent)
-        script_directory = os.path.dirname(os.path.abspath(__file__))
 
         self.file_system_model = QFileSystemModel()
-        self.file_system_model.setRootPath(QCoreApplication.applicationDirPath())
+        self.file_system_model.setRootPath(default_path)  # Imposta la cartella radice personalizzata
 
         self.tree_view = QTreeView(self)
         self.tree_view.setModel(self.file_system_model)
-        self.tree_view.setRootIndex(self.file_system_model.index(script_directory))
+        self.tree_view.setRootIndex(self.file_system_model.index(default_path))
         self.tree_view.setFixedSize(500, 250)
 
         self.open_button = QPushButton('Open', self)
-        # noinspection PyUnresolvedReferences
         self.open_button.clicked.connect(self.open_selected_file)
 
         layout = QVBoxLayout(self)
@@ -45,8 +43,8 @@ class FileExplorerWindow(QDialog):
         selected_index = self.tree_view.currentIndex()
         selected_path = self.file_system_model.filePath(selected_index)
         if os.path.isfile(selected_path):
-            # noinspection PyUnresolvedReferences
             self.file_selected_signal.emit(selected_path)
+
 
 
 class ImgCutter(QMainWindow):
@@ -124,8 +122,9 @@ class ImgCutter(QMainWindow):
     # noinspection PyPep8Naming
     def show_fileExplorer(self):
         if self.file_explorer_window is None or not self.file_explorer_window.isVisible():
-            self.file_explorer_window = FileExplorerWindow(self)
-            self.file_explorer_window.setWindowTitle('File Explorer')
+            default_path = "./"
+            self.file_explorer_window = FileExplorerWindow(default_path)
+            self.file_explorer_window.setWindowTitle('File Explorer - Open img file')
             main_pos = self.pos()
             file_explorer_pos = main_pos + QPoint(self.width(), 0)
             self.file_explorer_window.move(file_explorer_pos)
