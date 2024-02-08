@@ -7,3 +7,7 @@ venv
 ImgAutoCutter.spec
 main.spec
 .gitignore
+wizardscript.iss
+installericon.ico
+dist/installer-imgautocutter1-0-0.exe
+Output/img_autocutter-installer1-0-0.exe
